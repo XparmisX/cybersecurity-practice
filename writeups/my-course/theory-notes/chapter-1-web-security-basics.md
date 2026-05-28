@@ -7,4 +7,5 @@
 - [X] Browser
 - [X] Origin, Site
 - [X] Cookie
+
 **And how to use Burp Suite**
