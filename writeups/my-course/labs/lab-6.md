@@ -19,4 +19,4 @@
 4. استفاده از تگ ویدیو یا صوت
 اگر سایت اجازه آپلود یا قرار دادن تگ‌های مالتی‌مدیا را بدهد: 
 
-<video><source onerror="alert('stored xss attack')">
+< video > < source onerror="alert('stored xss attack')" >
