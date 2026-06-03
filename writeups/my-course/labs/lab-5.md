@@ -7,8 +7,7 @@ https://www.digikala.com/search/?q=my%20favorite%20book
 https://www.amazon.com/s?k=my+favorite+book&i=stripbooks-intl-ship&crid=3GC08M8G4QEZR&sprefix=my+favorite+%2Cstripbooks-intl-ship%2C338&ref=nb_sb_noss_2
 
 
-۱. تحلیل URL دیجی‌کالا:
-https://www.digikala.com/search/?q=my%20favorite%20book
+1. تحلیل URL دیجی‌کالا:
 
 سادگی: دیجی‌کالا از یک ساختار بسیار تمیز و استاندارد استفاده کرده است.
 پارامتر q: مخفف Query است. این همان پارامتری است که مقدار جستجوی تو را حمل می‌کند.
@@ -16,8 +15,7 @@ https://www.digikala.com/search/?q=my%20favorite%20book
 امنیت: اگر در دیجی‌کالا به جای کلمات، کد <script> بنویسی، آن‌ها این ورودی را قبل از نمایش در صفحه «خنثی» می‌کنند (مثلاً < را تبدیل به &lt; می‌کنند). به این کار Output Encoding می‌گویند.
 
 
-تحلیل URL آمازون:
-https://www.amazon.com/s?k=my+favorite+book&i=stripbooks-intl-ship&crid=3GC...
+2. تحلیل URL آمازون:
 
 آمازون بسیار پیچیده‌تر عمل کرده چون داده‌های بیشتری برای “تحلیل رفتار تو” نیاز دارد:
 
