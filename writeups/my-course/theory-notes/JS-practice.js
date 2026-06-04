@@ -114,3 +114,76 @@ fetch('https://example.com/api', {
     method: 'POST',
     body: JSON.stringify({data: 'data'})
 });
+
+
+
+//run this function when the document is loaded
+window.onload = () => {
+    //create a couple of elements in an otherwise empty HTML page
+    const heading = document.createElement("h1");
+    const headingText = document.createTextNode("Big Head!");
+    heading.appendChild(headingText);
+    document.body.appendChild(heading);
+};
+
+const paragraphs = document.querySelectorAll("p")
+//paragraph[0] is the first <p> element
+//paragraph[1] is the second <p> element, etc
+alert(paragraphs[0].nodeName);
+
+//in DOM, each element or node has 2 parameters: Property and Method
+//Properties: informations of an element, like "id", "className", or ...
+//Methods: operations of an element, like appendChild(), remove(), or ...
+//Also, we can use some attributes and related functions to interact or change the HTML elements
+
+//Property Part
+//<h1 id="blog-head">It's a blog about DOM</h1>
+//we want to change the header without changing the HTML codes in server, directly
+//so, we use DOM 
+//firstly, with using a selector named as "getElementByID" we receive the HTML element in JS
+var heading = document.getElementById('blog-head');
+//now, we use "innerText" to change the inner text!
+heading.innerText = 'Hello!';
+
+//"textContent" is also a property which can receive or determine an inside text (without HTML) safer than "innerHTML" because it shows HTML as a pure text, not a code
+heading.textContent = 'New stuff here';
+
+//"style" property  helps us to change the CSS style of an element, directly
+heading.style.fontSize = '24px';
+
+//we did all these changes without changing the HTML code directly
+
+//Method Part
+//<button id="my-button">Click me to read the blog about DOM</button>
+//adding an event listener :
+var button = document.getElementById('my-button');
+button.addEventListener('click', function() {
+    alert('You clicked the button for reading the blog about DOM');
+});
+//"addEventListener" is considered as Method
+
+//other examples of methods
+//"document.write" helps us to write into HTML directly,  mostly uses when the page is being loaded. if it uses into scripts after complete loading pages, the page content will be eliminated
+
+//"document.createElement" method can be used to make a new HTML element. later, we can use methods like "appendChild" to add the element to the DOM
+var newDiv = document.createElement('div');
+newDiv.textContent = 'This is a new div';
+document.body.appendChild(newDiv);
+//"element.appendChild" add a new element to the current element as the child
+var newParagraph = document.createElement('p');
+newParagraph.textContent = 'Here is a new paragraph';
+document.body.appendChild(newParagraph);
+//"element.removeChild" delete a specific child element from its parent element
+var parent = document.getElementById('parent');
+var child = document.getElementById('child');
+parent.removeChild(child);
+//methods are like functions!
+
+//Selector Part
+//there are different ways for choosing the elements in DOM
+//"getElementByTagName": receive the element by the tag name
+document.getElementsByTagName("li");
+//"getElementsByClassName": receive the element by the class name
+document.getElementsByClassName("btn");
+//"getElementByID": receive the element by the id 
+document.getElementById("title");
