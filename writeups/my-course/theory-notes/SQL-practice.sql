@@ -21,3 +21,14 @@ ORDER BY Age ASC;
 SELECT FirstName, LastName FROM Tehran_Customers
 UNION
 SELECT FirstName, LastName FROM Others_Customers;
+
+--3) Data Manipulation Language (DML)
+--INSERT, DELETE, UPDATE, SELECT (maybe?!)
+
+INSERT INTO Customers (ID, FirstName, LastName, Age, Address)
+VALUES (5, 'Ali', 'Alavi', 20, 'Tehran')
+DELETE FROM Customers
+WHERE FirstName = 'Ali' AND LastName = 'Alavi';
+UPDATE Customers
+SET Address = 'Shiraz'
+WHERE FirstName = 'Ali' AND LastName = 'Alavi';
