@@ -32,3 +32,9 @@ WHERE FirstName = 'Ali' AND LastName = 'Alavi';
 UPDATE Customers
 SET Address = 'Shiraz'
 WHERE FirstName = 'Ali' AND LastName = 'Alavi';
+
+--4) Data Control Language (DCL)
+--GRANT
+
+--5) Transaction Control Language (TCL)
+--ROLLBACK, COMMIT
