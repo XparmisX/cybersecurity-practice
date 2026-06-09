@@ -38,3 +38,6 @@ WHERE FirstName = 'Ali' AND LastName = 'Alavi';
 
 --5) Transaction Control Language (TCL)
 --ROLLBACK, COMMIT
+
+
+--Information Schema
