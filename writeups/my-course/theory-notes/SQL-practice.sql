@@ -77,3 +77,16 @@ SELECT table_schema, table_name
 FROM information_schema.tables 
 WHERE table_type = 'BASE TABLE'
 AND table_schema NOT IN ('information_schema', 'pg_catalog');
+
+--Equivalent of information_schema  in SQLite -> sqlite_master
+
+--1) Get List of Tables (List Tables)
+
+SELECT name
+FROM sqlite_master
+WHERE type = 'table';
+
+--2) Get Column Information (List Columns)
+--PRAGMA
+
+PRAGMA table_info('target_table');
