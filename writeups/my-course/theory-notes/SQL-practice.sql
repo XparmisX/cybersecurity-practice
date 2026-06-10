@@ -90,3 +90,19 @@ WHERE type = 'table';
 --PRAGMA
 
 PRAGMA table_info('target_table');
+
+
+
+
+
+
+
+/*
+### Summary of DBMS Differences
+
+| Feature | Microsoft SQL Server | MySQL | PostgreSQL | SQLite |
+| :--- | :--- | :--- | :--- | :--- |
+| Common Implementation | information_schema | information_schema | information_schema | sqlite_master |
+| Specific Info | Collation, Data Length | Storage Engine, Table Stats | pg_catalog | PRAGMA |
+| Schema Support | Full Support | Full Support | Full Support | No Schema |
+*/
