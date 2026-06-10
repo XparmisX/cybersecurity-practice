@@ -40,4 +40,3 @@ WHERE FirstName = 'Ali' AND LastName = 'Alavi';
 --ROLLBACK, COMMIT
 
 
---Information Schema
