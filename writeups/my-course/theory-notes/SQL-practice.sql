@@ -40,3 +40,11 @@ WHERE FirstName = 'Ali' AND LastName = 'Alavi';
 --ROLLBACK, COMMIT
 
 
+
+
+--Information Schema
+--1) Retrieve List of Tables (Show Tables)
+
+SELECT TABLE_SCHEMA, TABLE_NAME
+FROM INFORMATION_SCHEMA.TABLES
+WHERE TABLE_TYPE = 'BASE TABLE';
