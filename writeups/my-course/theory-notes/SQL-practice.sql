@@ -68,4 +68,12 @@ WHERE TABLE_TYPE = 'BASE TABLE';
 
 SELECT TABLE_SCHEMA, TABLE_NAME, ENGINE
 FROM INFORMATION_SCHEMA.TABLES 
-WHERE TABLE_TYPE = 'BASE TABLE'
+WHERE TABLE_TYPE = 'BASE TABLE';
+
+--3) PostgreSQL
+--pg_catalog
+
+SELECT table_schema, table_name
+FROM information_schema.tables 
+WHERE table_type = 'BASE TABLE'
+AND table_schema NOT IN ('information_schema', 'pg_catalog');
