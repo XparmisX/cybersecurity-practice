@@ -106,3 +106,5 @@ PRAGMA table_info('target_table');
 | Specific Info | Collation, Data Length | Storage Engine, Table Stats | pg_catalog | PRAGMA |
 | Schema Support | Full Support | Full Support | Full Support | No Schema |
 */
+
+--fun fact : in SQL, indexes start from 1
