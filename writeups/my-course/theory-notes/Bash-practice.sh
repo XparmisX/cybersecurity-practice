@@ -1,3 +1,5 @@
+# im gonna add comments later
+
 pwd
 ls
 ls -ahl
