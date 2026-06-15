@@ -2,6 +2,6 @@ Objective: Assessing file upload security by injecting XSS payloads via uploaded
 
 in this lab, i uploaded an HTML file (xss_attack.html) with this XSS payload :
 
-//<script>alert("upload file xss")</script>
+<script>alert("upload file xss")</script>
 
 as a profile picture.
