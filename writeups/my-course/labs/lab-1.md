@@ -4,7 +4,7 @@
 خب من تسلیم شدم بعد از مدت ها و با یه کد ساده ساخت جمنای داخل consule انجامش دادم :))))))))
 
 
-‍‍```javascript
+
 <pre>
 const usernames = ["dvegafisheredward", "raymond68", "bethbarrett", "triciafloyd", "dschultz", "ambercarter", "shawnaperez", "pwolfe", "patrick40", "smithjacqueline", "philipwhite", "eileengibson", "elizabeth53", "davidburke", "galvanalexandra", "sharon18", "ukemp", "smiller", "nicolechandler", "franciscoanderson"];
 const passwords = ["|L1$z6d{<QbY", "9vC3qF#bZgRm", "tF:06LpL^ndV", "q%ZdV!Bt8PKu", "xMb4*s<6EWr5", "Z!HjQ9>oA7aM", "P$J6nxFD=VhL", "7cM|%5mUjW9r", "2aX^Pf3W#b6u", "Zk@7aVm:9Q$D", "4vFjW#C7xP2k", "H9m^XvV|8nR2", "a4TzE6|y&Nw7", "3W<z^Fm7@bLp", "F3A+gY9zLx%7", "X8Pw|0ZfA4*Y", "R9c#Lh:5Qp2U", "V2zP!w#k6Lr4", "t%YvB1oL^6gQ", "W7X^Fb>9yJ3q"];
