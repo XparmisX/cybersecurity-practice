@@ -29,6 +29,5 @@ if __name__ == "__main__":
     jwt_token = input("Enter the JWT token: ").strip()
     wordlist_file = input("Enter the wordlist file path: ").strip()
     brute_force_jwt(jwt_token, wordlist_file)
-
-  
+    
 </pre>
