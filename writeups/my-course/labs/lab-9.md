@@ -21,3 +21,17 @@ Attempt 2: Slash as a Separator
 Payload: "/onclick=alertattribute xss attack /"
 
 Result: Failed. While the slash sometimes acts as a separator in HTML, the browser’s parser was still treating the entire string as part of the value attribute.
+
+# The Breakthrough: Tab Injection (Filter Evasion)
+
+After analyzing how the server handled inputs, I decided to bypass the space filter by using an alternative whitespace character. Instead of a standard space, I used a Horizontal Tab.
+
+The Logic:
+
+In URL encoding, a Space is %20, but a Tab is %09.
+
+Most filters only look for %20 or literal spaces.
+
+Browsers treat a Tab as a valid separator between HTML attributes.
+
+Final Payload (Via URL):
