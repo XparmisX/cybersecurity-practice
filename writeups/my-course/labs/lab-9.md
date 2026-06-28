@@ -35,3 +35,23 @@ Most filters only look for %20 or literal spaces.
 Browsers treat a Tab as a valid separator between HTML attributes.
 
 Final Payload (Via URL): ?q=x%09onclick=alert('attribute\x20xss\x20attack')
+
+Explanation:
+
+x: A dummy value for the value attribute.
+
+%09: The URL-encoded Tab character, which successfully separated value="x" from our injected onclick attribute.
+
+onclick=: The event handler we wanted to trigger.
+
+\x20: Hexadecimal representation of a space used inside the Javascript string to ensure the alert message met the lab requirements without using a literal space.
+
+## By navigating to the crafted URL, the HTML source code became: <input ... value="x" onclick="alert('attribute xss attack')">
+
+When I clicked the search box, the alert was successfully triggered, and the lab was marked as Completed.
+
+# Key Takeaways
+
+Filter Bypass: When a character is blocked, look for its ASCII/Hex/URL equivalents (like %09 for Tab or %0a for Newline).
+
+Context is Everything: Understanding that we were inside an input tag’s value attribute allowed us to focus on attribute-based injection rather than tag-based injection.
