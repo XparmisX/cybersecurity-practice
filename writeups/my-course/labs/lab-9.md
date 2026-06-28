@@ -1,3 +1,3 @@
 # Attribute-based XSS Bypass
 
-the search part in the web application is vulnerable to XSS attacks. 
+## The goal was to execute a Cross-Site Scripting (XSS) attack by injecting an alert function into an input tag attribute. The required alert message was: attribute xss attack.
