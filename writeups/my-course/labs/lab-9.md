@@ -15,3 +15,9 @@ Attempt 1: Standard Injection
 Payload: " onclick="alert('attribute xss attack')"
 
 Result: Failed. The spaces were removed, resulting in value="onclick="alert(...)", which is not executable.
+
+Attempt 2: Slash as a Separator
+
+Payload: "/onclick=alertattribute xss attack /"
+
+Result: Failed. While the slash sometimes acts as a separator in HTML, the browser’s parser was still treating the entire string as part of the value attribute.
