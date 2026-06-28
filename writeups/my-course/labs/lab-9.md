@@ -46,7 +46,7 @@ onclick=: The event handler we wanted to trigger.
 
 \x20: Hexadecimal representation of a space used inside the Javascript string to ensure the alert message met the lab requirements without using a literal space.
 
-## By navigating to the crafted URL, the HTML source code became: <input ... value="x" onclick="alert('attribute xss attack')">
+### By navigating to the crafted URL, the HTML source code became: <input ... value="x" onclick="alert('attribute xss attack')">
 
 When I clicked the search box, the alert was successfully triggered, and the lab was marked as Completed.
 
