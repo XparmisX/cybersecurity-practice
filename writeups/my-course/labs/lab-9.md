@@ -9,3 +9,9 @@ During the initial testing, I discovered several filters implemented by the appl
 2. Quote Handling: Standard double quotes were sometimes being misinterpreted or filtered depending on the context.
 
 3. HTML Encoding: Some characters like < and > were encoded to &lt; and &gt;, making it impossible to break out of the tag using ><script>.
+
+Attempt 1: Standard Injection
+
+Payload: " onclick="alert('attribute xss attack')"
+
+Result: Failed. The spaces were removed, resulting in value="onclick="alert(...)", which is not executable.
