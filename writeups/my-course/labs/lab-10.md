@@ -1,1 +1,1 @@
-به دنبال xss
+# Stored XSS
