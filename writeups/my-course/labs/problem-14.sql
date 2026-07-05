@@ -3,6 +3,6 @@
 -- Section2
     your 2nd query here --INSERT
 -- Section3
-    your 3rd query here
+    your 3rd query here --UPDATE
 -- Section4
     your 4th query here
