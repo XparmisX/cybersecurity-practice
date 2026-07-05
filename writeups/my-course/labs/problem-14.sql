@@ -5,4 +5,4 @@
 -- Section3
     your 3rd query here --UPDATE
 -- Section4
-    your 4th query here
+    your 4th query here --DELETE
