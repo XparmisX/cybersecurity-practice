@@ -1,4 +1,4 @@
-# SQL Injection Lab Writeup #2 — UNION-Based Attack to Extract Admin Credentials
+# SQL Injection Lab Writeup — UNION-Based Attack to Extract Admin Credentials
 
 ## Challenge Goal
 Using UNION-based SQL injection through the same product search box, the goal was to extract the `id` and `username` of the admin account from a `users` table in the backend SQLite database.
