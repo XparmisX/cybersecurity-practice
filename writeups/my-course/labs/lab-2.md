@@ -31,3 +31,6 @@ if __name__ == "__main__":
     brute_force_jwt(jwt_token, wordlist_file)
     
 </pre>
+
+
+این سوال باید حل شود
