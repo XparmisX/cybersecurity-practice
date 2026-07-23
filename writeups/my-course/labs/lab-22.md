@@ -35,4 +35,6 @@ So that was my next input :
 ```
 {% catch_flag %}
 ```
-And it reveals the link pointing to the flag 
+And it revealed the link pointing to the flag
+
+Lab Completed✅
