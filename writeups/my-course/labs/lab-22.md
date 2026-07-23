@@ -25,6 +25,7 @@ Again, i asked Claude how this error would help me, it told me : This was the ke
 So we (me and claude) found out the template engine of this web application is Django Template Language (DTL).
 
 Next step : Django's built-in debug tag
-
+```
+{% debug %}
 ```
 **Output:** a large dump of internal template context, including two lists: `template_tags` and `template_filters`.
