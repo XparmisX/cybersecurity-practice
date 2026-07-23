@@ -23,3 +23,8 @@ Error rendering comment: Could not parse the remainder: '*7' from '7*7'
 Again, i asked Claude how this error would help me, it told me : This was the key identifying clue. In Jinja2, `{{ 7*7 }}` would have rendered as `49`. Instead, the engine tried to parse `7*7` as a variable lookup and choked on the `*7` part — this exact failure mode, combined with the earlier error phrasing, matches the **Django Template Language (DTL)**, not Jinja2, Twig, or another engine. DTL does not support arithmetic expressions or function calls with parentheses directly inside `{{ }}`, which made this a reliable fingerprint.
 
 So we (me and claude) found out the template engine of this web application is Django Template Language (DTL).
+
+Next step : Django's built-in debug tag
+
+```
+**Output:** a large dump of internal template context, including two lists: `template_tags` and `template_filters`.
