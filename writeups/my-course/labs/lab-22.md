@@ -29,3 +29,10 @@ Next step : Django's built-in debug tag
 {% debug %}
 ```
 **Output:** a large dump of internal template context, including two lists: `template_tags` and `template_filters`.
+And by seraching the output, I found a custom added tag named by `catch_flag`
+
+So that was my next input : 
+```
+{% catch_flag %}
+```
+And it reveals the link pointing to the flag 
