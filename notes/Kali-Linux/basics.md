@@ -77,7 +77,7 @@ echo "Hi!" > test.txt
 ```
 and got stuck in a weird state where the terminal kept showing `dquote>` and wouldn't run my command.
 
-**What actually happened:** `dquote>` is the shell telling me it thinks I have an **unclosed double quote** — meaning somewhere I opened a `"` but never closed it, so bash is still waiting for me to finish the string before it will execute anything. Every line I typed after that (`Hie!`, `Hi`, etc.) was just being swallowed as *more text inside that still-open quote*, not run as new commands. To get out of this stuck state, I need to either type the matching closing `"` or press `Ctrl+C` to cancel the whole thing and start the command over from scratch.
+**What actually happened:** `dquote>` is the shell telling me it thinks I have an **unclosed double quote** — meaning somewhere I opened a `"` but never closed it, so bash is still waiting for me to finish the string before it will execute anything. Every line I typed after that (`Hi!`, `Hi`, etc.) was just being swallowed as *more text inside that still-open quote*, not run as new commands. To get out of this stuck state, I need to either type the matching closing `"` or press `Ctrl+C` to cancel the whole thing and start the command over from scratch.
 
 **What the command does when typed correctly:**
 ```bash
