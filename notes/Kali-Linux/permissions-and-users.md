@@ -177,3 +177,4 @@ There's also a file, `/etc/sudoers`, which controls **who is allowed to use `sud
 | `-` | no permission | 0 |
  
 Position order is always: **owner → group → others**, and within each: **r → w → x**.
+
