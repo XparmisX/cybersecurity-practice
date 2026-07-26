@@ -173,3 +173,4 @@ This opens a scrollable reference (`q` to quit out of it) with full documentatio
 | `passwd` | Change my account password |
 | `man <command>` | Open the manual page for a command |
 | `<command> --help` | Quick usage summary for a command |
+
