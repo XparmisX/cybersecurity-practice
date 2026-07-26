@@ -23,3 +23,9 @@ d rwx r-x r-x
 ```
  
 ### 1. The very first character — file type
+This isn't part of the permissions at all, it just tells me *what kind of thing* this line describes:
+- `-` → a regular file (like `.bashrc` or `hello.txt`)
+- `d` → a directory/folder (like `Desktop`, `.config`)
+- `l` → a symbolic link (a shortcut/pointer to another file) — I saw this with `.face.icon -> .face`
+
+### 2. The remaining 9 characters — three groups of three
