@@ -65,3 +65,28 @@ This is my own home directory (`.`, meaning "this directory itself"). Owner (`ka
 That number (e.g. the `19` in `drwx------ 19 kali kali ...`) is the **link count** — for directories, it roughly corresponds to the number of subdirectories inside it plus 2 (one for itself `.` and one for its parent `..`). I don't need to worry about this much day-to-day, just good to know what that number represents.
  
 ## `chmod` — Change Mode (Change Permissions)
+ 
+`chmod` lets me change the read/write/execute permissions on a file or directory. There are two ways to specify what I want:
+ 
+### Numeric (octal) mode
+Each permission has a numeric value:
+- `r` = 4
+- `w` = 2
+- `x` = 1
+- (no permission) = 0
+I add these up **per group** (owner / group / others) to get a single digit for each, then combine all three digits in order (owner, group, others):
+ 
+```bash
+chmod 777 hello.txt
+```
+`7` = 4+2+1 = read+write+execute. Applying `777` means owner, group, AND others all get full read/write/execute:
+```
+-rwxrwxrwx  1 kali kali     6 Jul 26 03:09 hello.txt
+```
+Note: `777` is almost always **too permissive** for real-world use (it lets literally anyone on the system modify or execute the file) — it's fine for a throwaway test file like this, but it's a common security mistake to leave real files/scripts at `777`.
+ 
+Other common combinations I should remember:
+- `644` (`rw-r--r--`) — normal default for files: owner can edit, everyone else can only read.
+- `755` (`rwxr-xr-x`) — normal for scripts/programs: owner can edit and run, everyone else can only read and run.
+- `600` (`rw-------`) — private file: only the owner can read/write, nobody else can even look. Good for sensitive files like SSH keys (which is exactly why I saw `.ssh` listed as `drwx------` earlier).
+### Symbolic mode (the `+`/`-` style)
