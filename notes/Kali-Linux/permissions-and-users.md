@@ -38,3 +38,30 @@ Each set of three follows the same pattern: **r, w, x** (in that fixed order), w
 - `w` = **write** (can modify/delete the file / create-delete files inside a directory)
 - `x` = **execute** (can run the file as a program or script / "enter" into a directory with `cd`)
 ### Worked example from my own output
+```
+-rw-rw-r--  1 kali kali     6 Jul 26 03:09 hello.txt
+```
+- `-` → regular file
+- `rw-` (owner/kali) → I can read and write it, but not execute it
+- `rw-` (group/kali) → members of the `kali` group can also read and write it, but not execute it
+- `r--` (others) → everyone else can only read it, no write, no execute
+This is Linux's actual **default permission for a newly created file** (`rw-rw-r--`, or `664` in numeric form) — nothing unusual happened, that's just the standard starting permission before any `umask`/`chmod` adjustments.
+ 
+### Another example — a directory
+```
+drwxr-xr-x  2 kali kali  4096 Jul 23 03:14 Desktop
+```
+- `d` → directory
+- `rwx` (owner) → I can list its contents, create/delete files inside it, and `cd` into it
+- `r-x` (group) → group members can list contents and `cd` into it, but can't create/delete files inside
+- `r-x` (others) → same as group — read/list and enter, but no write
+### And a locked-down one
+```
+drwx------ 19 kali kali  4096 Jul 26 02:52 .
+```
+This is my own home directory (`.`, meaning "this directory itself"). Owner (`kali`) has full `rwx`, but group and others have **nothing** (`---`) — meaning no other user on the system can even look inside my home folder, let alone read or modify anything in it. Makes sense as a sane default for a personal home directory.
+ 
+### The number right after the permissions string
+That number (e.g. the `19` in `drwx------ 19 kali kali ...`) is the **link count** — for directories, it roughly corresponds to the number of subdirectories inside it plus 2 (one for itself `.` and one for its parent `..`). I don't need to worry about this much day-to-day, just good to know what that number represents.
+ 
+## `chmod` — Change Mode (Change Permissions)
