@@ -35,3 +35,21 @@ This was the part I didn't originally understand, so here's the fuller explanati
 **One nuance worth remembering:** some devices/firewalls are deliberately configured to ignore ICMP Echo Requests (i.e., they won't respond to `ping` even though they're online and reachable through other protocols). So a failed `ping` doesn't always mean a device is offline — it might just mean ICMP is being blocked, which is itself a useful thing to know during reconnaissance.
  
 ## Ports — Connections and Listening Ports
+A single device can run many different services simultaneously (a web server, an email server, SSH access, etc.). To keep data going to the correct service instead of getting mixed up, each service listens on a specific **port** — a number between 0 and 65535.
+ 
+- **Listening port**: a service is actively running and waiting for incoming connections on that port (e.g. port 80 for a web server, port 22 for SSH).
+- **Connection**: an actual, currently active link between two devices (e.g. my browser is right now talking to a specific website over port 443).
+This is exactly what the `netstat` command is for — it shows which ports on my machine are currently listening, and what active connections currently exist.
+ 
+## Routing Table
+When data needs to travel from my device to a destination **outside** my local network (like a website on the internet), my device needs to know which path/gateway to send it through. The **routing table** is essentially a list of rules like: "to reach this range of addresses, send traffic out through this path." The `route` command (or its modern replacement, `ip route`) displays this table, and can also be used to modify it.
+ 
+## How These Concepts Map to the Commands I'm About to Learn
+Now that I have this foundation, the upcoming commands make a lot more sense:
+- **`ifconfig`** → shows my own IP and MAC address information
+- **`iwconfig`** → same idea, but specifically for wireless network interfaces
+- **`ping`** → uses ICMP to test whether a host is reachable and measure latency
+- **`arp`** → displays the ARP table (IP-to-MAC address mappings)
+- **`netstat`** → shows listening ports and active connections
+- **`route`** → displays (and can modify) the routing table
+---
