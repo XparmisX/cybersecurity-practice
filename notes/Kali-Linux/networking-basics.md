@@ -13,3 +13,25 @@ Unlike an IP address (which can change depending on what network I connect to), 
 - IP = like a postal address — changes depending on where you are.
 - MAC = like a hardware serial number — effectively permanent (unless deliberately altered, a technique known as MAC spoofing, which comes up in ethical hacking contexts).
 ## Subnet Mask
+A subnet mask defines which portion of an IP address represents the **network** and which portion represents the specific **host** (device) within that network.
+ 
+Example: a very common subnet mask is `255.255.255.0`. This means the first three sections of an IP (e.g. `192.168.1`) identify the network itself, while only the last number (e.g. `.5` or `.20`) identifies the specific device within that network. This is how devices determine whether a destination is on their own local network (and can be reached directly) or is somewhere external (requiring a router to forward the traffic).
+ 
+## ARP (Address Resolution Protocol)
+Networks communicate using **IP addresses**, but the actual physical hardware only understands **MAC addresses**. ARP is the protocol that bridges this gap: when my device needs to talk to a specific IP address on the local network, it uses ARP to essentially ask "which MAC address belongs to this IP?" and caches the answer in something called an ARP table.
+ 
+## ICMP (Internet Control Message Protocol) and What `ping` Actually Does
+This was the part I didn't originally understand, so here's the fuller explanation:
+ 
+`ping` is a small diagnostic tool built on top of the **ICMP** protocol. ICMP isn't used for normal data transfer (like loading a webpage) — it's specifically designed for **network diagnostics and error reporting** between devices.
+ 
+**What happens, step by step, when I run `ping some-address`:**
+1. My machine sends out a tiny ICMP packet called an **Echo Request** to the target address — essentially a message that just says "are you there?"
+2. If the target device is reachable and configured to respond, it sends back an **Echo Reply** — basically saying "yes, I'm here."
+3. My machine measures the **round-trip time** — how long it took for that reply to come back (measured in milliseconds).
+4. This repeats a few times (by default), and I get a summary: how many packets got a reply (reachability), and the timing stats (min/avg/max latency).
+**Why this is useful:** `ping` answers two very basic but important questions — is the target device actually reachable at all, and if so, how fast/slow is the connection to it. It doesn't tell me anything about *what services* are running on that device (that's what tools like `nmap` are for) — it purely checks basic reachability and latency at the network level.
+ 
+**One nuance worth remembering:** some devices/firewalls are deliberately configured to ignore ICMP Echo Requests (i.e., they won't respond to `ping` even though they're online and reachable through other protocols). So a failed `ping` doesn't always mean a device is offline — it might just mean ICMP is being blocked, which is itself a useful thing to know during reconnaissance.
+ 
+## Ports — Connections and Listening Ports
