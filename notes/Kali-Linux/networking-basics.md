@@ -168,3 +168,4 @@ This is my routing table:
 | `arp -a` | Known IP-to-MAC mappings (local network) | Passive discovery of other devices already contacted |
 | `netstat -nao` | Listening ports + active connections (network and local) | Spot running services, active connections, possible backdoors |
 | `route` | Routing table (default gateway, local subnet rules) | Understand pivoting potential across network segments |
+
