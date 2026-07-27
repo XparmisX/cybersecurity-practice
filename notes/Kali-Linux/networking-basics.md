@@ -53,3 +53,4 @@ Now that I have this foundation, the upcoming commands make a lot more sense:
 - **`netstat`** → shows listening ports and active connections
 - **`route`** → displays (and can modify) the routing table
 ---
+# Networking Commands
