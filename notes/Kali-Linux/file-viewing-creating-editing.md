@@ -96,3 +96,15 @@ gedit newfile.txt
 This opened the file in a full graphical window instead of inside the terminal. A couple of harmless warning messages appeared in the terminal about missing "Peas" plugin components — these are just optional GNOME plugin-system components that weren't installed, not something that affects gedit's core editing functionality.
  
 ## Summary Cheat Sheet
+ 
+| Command | Purpose |
+|---|---|
+| `echo "text"` | Print text to the terminal |
+| `cat <file>` | Print a file's contents to the terminal |
+| `echo "text" > file` | Write text into a file, **overwriting** anything already there |
+| `echo "text" >> file` | Write text into a file, **appending** after existing content |
+| `touch <file>` | Create a new, empty file instantly |
+| `nano <file>` | Edit a file inside the terminal (CLI editor); file only saves on `Ctrl+O` |
+| `gedit <file>` | Edit a file in a separate graphical window (GUI editor) |
+| `sudo apt update` | Refresh the package index — fixes "no installation candidate" errors for genuinely available packages |
+ 
