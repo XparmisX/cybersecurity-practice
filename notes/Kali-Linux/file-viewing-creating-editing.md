@@ -43,3 +43,31 @@ cat hey.txt
 - `>` — when I specifically want to reset/replace a file's contents (e.g. starting a fresh output file for a scan).
 - `>>` — when I want to keep building up a file over time without losing previous entries — e.g. appending discovered IP addresses to a list, logging the output of several different commands into the same file, or building up notes/results across multiple scan runs without overwriting earlier findings.
 ## `touch`
+Creates a new, completely **empty** file instantly (unlike `echo ... >`, which requires me to also provide some text content).
+```bash
+touch newfile.txt
+ls                  # newfile.txt now exists
+cat newfile.txt      # (nothing — it's empty)
+```
+Useful when I just need a placeholder file to exist (to edit later, or because some tool/script expects a file to already be present) without needing to put anything in it yet.
+ 
+## `nano` — Terminal-Based Text Editor
+A text editor that runs **inside the terminal itself** — no separate window opens.
+```bash
+nano newfile.txt
+```
+This opens a full-screen editing view directly in my terminal window, where I can type normally, and the bottom of the screen shows keyboard shortcuts (like `Ctrl+O` to save/"Write Out", `Ctrl+X` to exit).
+ 
+**Important behavior I confirmed:** if I run `nano` on a filename that **doesn't exist yet**, it doesn't error out — it just opens a blank editor, and the file only actually gets created on disk once I save it (`Ctrl+O`) and confirm the filename. I tested this directly:
+```bash
+nano thisisnew.txt
+ls                        # thisisnew.txt does NOT show up yet — I hadn't saved/typed anything
+cat thisisnew.txt          # No such file or directory
+ 
+nano thisisnew.txt        # opened it again, typed "hello", saved this time
+ls                        # thisisnew.txt now exists
+cat thisisnew.txt          # hello
+```
+So `nano` (like most editors) only writes to disk on an explicit save — simply opening it on a new filename doesn't create anything by itself.
+ 
+## `gedit` — Graphical Text Editor
