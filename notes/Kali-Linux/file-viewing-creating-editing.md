@@ -107,4 +107,3 @@ This opened the file in a full graphical window instead of inside the terminal. 
 | `nano <file>` | Edit a file inside the terminal (CLI editor); file only saves on `Ctrl+O` |
 | `gedit <file>` | Edit a file in a separate graphical window (GUI editor) |
 | `sudo apt update` | Refresh the package index — fixes "no installation candidate" errors for genuinely available packages |
- 
