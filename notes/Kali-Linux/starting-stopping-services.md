@@ -34,5 +34,4 @@ sudo systemctl disable <name>   # stop it from auto-starting on boot
 ```
  
 **Key distinction I need to keep straight:** `enable`/`disable` control **future boot behavior only** — they don't necessarily start or stop the service *right now*. So it's common to need both commands together: e.g. `sudo systemctl enable ssh` (so it survives reboots) plus `sudo service ssh start` (so it's actually running immediately too), if I want a service both running now and persisting across restarts.
- 
----
+
