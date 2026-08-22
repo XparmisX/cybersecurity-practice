@@ -1,6 +1,5 @@
 # cybersecurity-practice
-Hey, I'm learning cybersecurity right now as an absolute beginner 
-(i got into this world suggested by a random guy on discord lol).
+Hey, I'm learning cybersecurity right now as an absolute beginner.
 
 
 Okay, let's see what will happen on my journey!
