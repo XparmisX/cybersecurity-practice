@@ -9,3 +9,9 @@ Prerequisite : Insecure direct object references (IDOR)
 #### Overview : Want to be a part of the elite club of CyberHeroes? Prove your merit by finding a way to log in!
 
 Prerequisite : Authentication Bypass
+
+# Challenge Name : Soupedecode 01
+
+#### Overview : Soupedecode is an intense and engaging challenge in which players must compromise a domain controller by exploiting Kerberos authentication, navigating through SMB shares, performing password spraying, and utilizing Pass-the-Hash techniques. Prepare to test your skills and strategies in this multifaceted cyber security adventure.
+
+Prerequisite : idk yet!!!
