@@ -99,3 +99,5 @@ This is a classic example of a **broken/missing server-side enforcement of a mul
 - 2FA is only as strong as the server-side session-state checks behind it. If a session is granted "authenticated" status after step 1 (password) and the app relies on the *UI flow* (rather than a real server-side flag like `mfa_verified: true`) to force the user through step 2, the second factor can be trivially skipped by requesting a protected URL directly.
 - Always test multi-step auth flows by trying to jump straight to the "logged in" state URL after only completing the first factor — a surprising number of implementations don't independently verify that every required step was actually completed.
 - A correct implementation would tie session state to a `pending_2fa` flag that is checked (and rejected) by every protected route, not just relying on the login UI not offering a link to skip it.
+
+# Lab: Password reset broken logic
