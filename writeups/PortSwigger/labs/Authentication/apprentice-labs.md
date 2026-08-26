@@ -53,3 +53,5 @@ Logged in manually with the identified username/password pair and reached the ac
 - Any observable difference between "invalid user" and "valid user, wrong password" responses (message text, length, timing, status code) can be used for username enumeration. A secure implementation should return an identical generic message (e.g. "Invalid username or password") regardless of which part was wrong.
 - Redirects (302) after login are a useful behavioral oracle during brute-forcing when status codes otherwise look uniform — worth checking the `Location` header to confirm it actually points to an authenticated page rather than assuming success from the status code alone.
 - Sorting Intruder results by **Length** and by **Status** are two of the fastest ways to spot the "odd one out" in a large batch of automated requests.
+
+# Lab: 2FA simple bypass
