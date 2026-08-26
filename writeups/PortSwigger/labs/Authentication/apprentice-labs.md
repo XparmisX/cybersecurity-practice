@@ -101,3 +101,83 @@ This is a classic example of a **broken/missing server-side enforcement of a mul
 - A correct implementation would tie session state to a `pending_2fa` flag that is checked (and rejected) by every protected route, not just relying on the login UI not offering a link to skip it.
 
 # Lab: Password reset broken logic
+
+**Category:** Authentication
+
+**Difficulty:** Apprentice
+
+**Status:** Solved
+ 
+## Lab Description
+ 
+This lab's password reset functionality is vulnerable. Goal: reset Carlos's password, then log in and access his "My account" page.
+ 
+- My credentials: `wiener:peter`
+- Victim's username: `carlos`
+## Step 1: Trigger My Own Password Reset
+ 
+1. With Burp running, I clicked **Forgot your password?** on the login page and entered my own username (`wiener`).
+2. Opened the lab's built-in email client and found the password reset email. Clicked the reset link inside it.
+3. This opened a page with two fields (new password, confirm new password). I initially confused this step with the actual reset submission — clicking the email link only sends a `GET /forgot-password?temp-forgot-password-token=...` request, which just *loads the reset form*. It does **not** contain any `username` parameter, since it's just rendering the page.
+4. Filled in a new password and clicked the reset/submit button. This is the request that actually matters — a `POST /forgot-password?temp-forgot-password-token=...`.
+**Where I got confused:** I initially sent the GET request to Repeater looking for a `username` field to edit — it's not there. The `username` only shows up in the **POST** request body, which only fires *after* you actually submit the new password form, not when you just open the reset link. Lesson: GET (loading the form) and POST (submitting the form) are two separate requests, and you have to catch the right one.
+ 
+## Step 2: Find and Inspect the POST Request
+ 
+1. Went to **Proxy > HTTP history**, filtered for `forgot-password`, and found the `POST /forgot-password?temp-forgot-password-token=...` request (the one triggered by clicking submit, not the link click).
+2. Looked at the request body:
+```
+   temp-forgot-password-token=<long-random-token>&username=wiener&new-password-1=...&new-password-2=...
+```
+3. This confirmed the form includes a **hidden input field** (`username`) that isn't visible on the page but gets sent along with the password fields when the form is submitted. This is just standard HTML: the field is `type="hidden"`, so nothing shows on screen, but it's still part of the form data POSTed to the server.
+## Step 3: Test Whether the Token Is Actually Checked
+ 
+1. Sent this POST request to **Repeater**.
+2. Deleted the token value in the URL (`temp-forgot-password-token=` with nothing after `=`) and in the body (same).
+3. Sent it. The password reset still worked — meaning **the server never actually validates the token** when processing this request. It just trusts whatever `username` is in the body.
+This is the actual vulnerability: the reset token is supposed to prove "this request came from the person who owns this email," but the server doesn't check it at all during the final reset step — it only relies on the `username` field, which the client fully controls.
+ 
+## Step 4: Exploit — Reset Carlos's Password Instead
+ 
+1. Went back to the browser, requested a **new** password reset for myself (to get a fresh valid session/flow going), and reached the reset form again.
+2. Submitted a new password, caught the fresh `POST /forgot-password?...` request, sent it to Repeater again.
+3. In Repeater, edited the raw request:
+   - Emptied the token value in the URL: `temp-forgot-password-token=`
+   - In the body, emptied the token value there too
+   - Changed `username=wiener` → `username=carlos`
+   - Set `new-password-1` and `new-password-2` to a new password of my choosing (`1384`)
+4. Final body looked like:
+```
+   temp-forgot-password-token=&username=carlos&new-password-1=1384&new-password-2=1384
+```
+5. Clicked **Send**.
+**Response:**
+```
+HTTP/2 302 Found
+Location: /
+Set-Cookie: session=...
+```
+ 
+A 302 redirect to `/` with a fresh `Set-Cookie` — same success signal pattern as the login brute-force lab (PRG pattern: successful state-changing action → redirect, not a re-rendered form).
+ 
+## Step 5: Log In as Carlos
+ 
+1. Logged out of my own session in the browser.
+2. Logged in with `carlos` / `1384`.
+3. Clicked **My account** — reached Carlos's account page. Lab solved.
+## Why This Works
+ 
+The password reset flow is supposed to be:
+ 
+1. User requests reset → server generates a random, single-use token tied to that specific username → emails a link containing the token.
+2. User clicks the link, submits a new password → server checks: "does this token match a pending reset request for this username?" → if valid, updates that user's password.
+The flaw: step 2's validation is broken. The server **never re-checks that the token actually belongs to (or is valid for) the username in the request body**. It just takes `username` at face value and resets *that* account's password — regardless of which token (or lack of one) was submitted alongside it.
+ 
+Since the token is meant to be the only thing binding "this reset request" to "this specific user," and it's not checked at all, anyone can request a password reset for their own account, then reuse (or blank out) the resulting POST request while swapping in a different `username`, and hijack any account.
+ 
+## Takeaways
+ 
+- Hidden form fields are still just parameters the client controls — "hidden" only means invisible in the UI, not protected or server-trusted. If sensitive fields like `username` are passed this way instead of being derived server-side from the token/session, they can be tampered with.
+- A security token (like a password reset token) is worthless if the endpoint that consumes it doesn't actually validate it against the resource being modified. Always test: does removing/blanking a token change the outcome? If not, it's not really being enforced.
+- Multi-step flows (request reset → email link → submit new password) need to be traced request-by-request in Burp's HTTP history. It's easy to grab the wrong request (e.g., the initial GET that just loads a form) instead of the one that actually performs the state change (the POST). When in doubt, check the HTTP method and whether the request body contains the data you'd expect from submitting the form.
+- The 302 + Set-Cookie response pattern is a reliable signal that a state-changing action (login, password reset, etc.) succeeded server-side — same principle as in the earlier brute-force lab.
