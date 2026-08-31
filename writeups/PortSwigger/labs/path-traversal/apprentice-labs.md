@@ -41,7 +41,7 @@ It seems I am supposed to see the contents, which I didn't using my own method. 
 ### Step 2: Generate the Traffic
  
 1. In Burp's browser, accessed the lab.
-2. On the shop homepage, clicked into a product (**View details**) — this makes the browser request that product's image from the server.
+2. On the shop homepage, clicked into a product (**View details**), clicked into the product image. This makes the browser request that product's image from the server.
 ### Step 3: Find the Request in HTTP History
  
 1. Went to **Proxy > HTTP history**.
@@ -89,4 +89,4 @@ Both payloads worked here because this lab's traversal filter is naive — `../.
  
 ## Takeaway
  
-A lab (or app) marking a request as "successful" confirms the server-side condition was met — it doesn't guarantee you personally saw the proof. For real testing/reporting, always verify by inspecting the raw response in Burp rather than trusting what the browser renders.
+A lab (or app) marking a request as "successful" confirms the server-side condition was met but it doesn't guarantee you personally saw the proof. For real testing/reporting, always verify by inspecting the raw response in Burp rather than trusting what the browser renders.
