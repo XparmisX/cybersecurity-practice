@@ -59,7 +59,7 @@ Since this value lives entirely on the client side and is never cryptographicall
    - Password: `peter`
 2. **Edit the cookie:**
    - Pressed `F12` to open Developer Tools.
-   - Went to the **Application** tab (Chrome/Edge) — or **Storage** in Firefox.
+   - Went to the **Application** tab (Chrome/Edge) or **Storage** in Firefox.
    - In the left sidebar, opened **Cookies** and selected the site's domain.
    - Found the cookie named `Admin` in the cookie table.
    - Double-clicked its **Value** field (currently `false`) and changed it to `true`.
@@ -69,14 +69,14 @@ Since this value lives entirely on the client side and is never cryptographicall
      https://LAB-ID.web-security-academy.net/admin
 ```
    - The admin panel loaded successfully.
-   - Clicked **Delete** next to the username `carlos` — lab solved.
+   - Clicked **Delete** next to the username `carlos` -> lab solved.
 ### Method 2: Burp Suite (matches the official PortSwigger approach)
  
 1. In **Proxy > Intercept**, turned **Intercept is on**.
 2. To make Burp also intercept responses (not just requests) coming back from the server:
    - Went to **Proxy > Options > Intercept Server Responses** and enabled **"Intercept responses based on the following rules."**
 3. Logged in through the browser using `wiener:peter`.
-4. Burp intercepted the `POST /login` request — forwarded it as-is.
+4. Burp intercepted the `POST /login` request, forwarded it as it is.
 5. Because response interception was now on, Burp paused the **response** to that login request. In the response headers, found:
 ```
    Set-Cookie: Admin=false; Path=/
@@ -86,18 +86,18 @@ Since this value lives entirely on the client side and is never cryptographicall
    Set-Cookie: Admin=true; Path=/
 ```
 7. Forwarded the modified response. The browser now stored `Admin=true` as if the server itself had issued it.
-8. Navigated to `/admin`, and deleted the user `carlos` — lab solved.
+8. Navigated to `/admin`, and deleted the user `carlos` -> lab solved.
 ## Why This Works
  
 Both methods exploit the exact same root flaw, just at different points in the pipeline:
  
 - **Method 1** edits the cookie *after* it's already stored in the browser, directly through DevTools.
 - **Method 2** edits the cookie *in transit*, intercepting the server's own `Set-Cookie` response header before it ever reaches the browser, so the browser ends up storing the tampered value as though the server had legitimately issued it.
-Either way, the server has no way to tell the difference — because it never actually verifies the `Admin` cookie against anything on the server side (like a database-backed role tied to the authenticated session). It just reads whatever cookie value shows up on each request and trusts it blindly.
+Either way, the server has no way to tell the difference because it never actually verifies the `Admin` cookie against anything on the server side (like a database-backed role tied to the authenticated session). It just reads whatever cookie value shows up on each request and trusts it blindly.
  
 ## Takeaways
  
 - **Never trust client-controlled data for authorization decisions.** A cookie, header, or hidden form field that the client can freely read and modify must never be the sole source of truth for privilege checks. Role/permission state should be derived server-side from the authenticated session (e.g., a session ID mapped to a role in a database), not passed back and forth as a plain, unsigned value.
-- If cookies must carry any security-relevant state, they need to be cryptographically signed and verified (e.g., signed JWT, HMAC) so tampering is detectable — a naive `true`/`false` string offers zero protection.
+- If cookies must carry any security-relevant state, they need to be cryptographically signed and verified (e.g., signed JWT, HMAC) so tampering is detectable, a naive `true`/`false` string offers zero protection.
 - This is functionally similar to IDOR/broken access control issues in general: whenever an app's authorization logic depends on something the user can directly edit (URL parameter, cookie, hidden field), assume it can and will be manipulated during testing.
-- Burp's **Intercept Server Responses** option is a good tool to know for cases like this — it lets you tamper with data on the way *into* the browser, not just on the way out, which is useful when you want to see how the client behaves with attacker-modified server responses.
+- Burp's **Intercept Server Responses** option is a good tool to know for cases like this. It lets you tamper with data on the way *into* the browser, not just on the way out, which is useful when you want to see how the client behaves with attacker-modified server responses.
