@@ -30,6 +30,8 @@ Review the lab home page's source using Burp Suite or your web browser's develop
 
 Load the admin panel and delete `carlos`.
 
+#### Note: 
+
 # Lab: User role controlled by request parameter
 
 **Category:** Access control
