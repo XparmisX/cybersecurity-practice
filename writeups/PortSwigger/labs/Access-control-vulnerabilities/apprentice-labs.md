@@ -66,7 +66,7 @@ Since this value lives entirely on the client side and is never cryptographicall
 3. **Delete Carlos:**
    - Navigated to:
 ```
-     https://YOUR-LAB-ID.web-security-academy.net/admin
+     https://LAB-ID.web-security-academy.net/admin
 ```
    - The admin panel loaded successfully.
    - Clicked **Delete** next to the username `carlos` — lab solved.
