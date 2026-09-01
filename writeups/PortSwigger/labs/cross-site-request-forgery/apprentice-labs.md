@@ -4,6 +4,6 @@
 
 **Difficulty:** Apprentice
 
-**Status:** 
+**Status:** Solved
  
 ## Lab Description
