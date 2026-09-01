@@ -18,11 +18,17 @@ Go to the lab and view `robots.txt` by appending `/robots.txt` to the lab URL. N
 
 **Difficulty:** Apprentice
 
-**Status:** 
+**Status:** Solved
  
 ## Lab Description
+This lab has an unprotected admin panel. It's located at an unpredictable location, but the location is disclosed somewhere in the application. Solve the lab by accessing the admin panel, and using it to delete the user `carlos`.
 
+### Solution
+Review the lab home page's source using Burp Suite or your web browser's developer tools. Observe that it contains some JavaScript that discloses the URL of the admin panel.
 
+<img width="601" height="228" alt="Screenshot 2026-09-01 085239" src="https://github.com/user-attachments/assets/1e1f2b28-e394-4a05-9e0e-2ddc21f92d41" />
+
+Load the admin panel and delete `carlos`.
 
 # Lab: User role controlled by request parameter
 
