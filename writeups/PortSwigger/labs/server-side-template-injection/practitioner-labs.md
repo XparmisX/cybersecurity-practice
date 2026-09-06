@@ -36,3 +36,5 @@ This lab is vulnerable to server-side template injection. To solve the lab, iden
  
 ## Lab Description
 This lab is vulnerable to server-side template injection. To solve the lab, identify the template engine and find a documented exploit online that you can use to execute arbitrary code, then delete the `morale.txt` file from Carlos's home directory.
+
+## Solution
