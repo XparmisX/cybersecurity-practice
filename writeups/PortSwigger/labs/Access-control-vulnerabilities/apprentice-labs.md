@@ -144,3 +144,45 @@ Find a blog post by `carlos`. Click on `carlos` and observe that the URL contain
 This lab contains an access control vulnerability where sensitive information is leaked in the body of a redirect response. To solve the lab, obtain the API key for the user `carlos` and submit it as the solution. You can log in to your own account using the following credentials: `wiener:peter`
 
 ## Solution 
+After logging in as `wiener`, the account page loads at a URL like:
+```
+GET /my-account?id=wiener HTTP/2
+Host: <lab-id>.web-security-academy.net
+Cookie: session=<wiener's session token>
+```
+
+The page renders wiener's own account details, including an API key field. The presence of an `id` parameter directly in the URL — rather than the server inferring the identity purely from the session cookie — is the first red flag: it suggests the server *might* be using this parameter to decide whose data to display, rather than relying solely on the authenticated session.
+
+This is a classic setup for an **IDOR (Insecure Direct Object Reference)** test: if the server trusts the `id` parameter for data lookup without properly re-validating it against the logged-in session, an attacker can potentially request another user's data just by changing the parameter — while still being authenticated as themselves.
+
+## Step-by-Step Solution with Burp Suite
+
+1. **Intercept the request.** With Burp's proxy running and the browser configured to route through it, I loaded `/my-account` while logged in as `wiener`. I caught the request in Burp Proxy's "Intercept" tab.
+
+2. **Send to Repeater.** Right-clicked the intercepted request → "Send to Repeater" (or `Ctrl+R`). This lets me freely modify and resend the request as many times as needed without re-triggering the browser flow each time.
+
+3. **Baseline request.** First, I sent the original, unmodified request (`id=wiener`) in Repeater just to confirm the normal response: HTTP `200 OK`, with wiener's account page and his own API key in the body. This confirms the app's *normal* behavior before tampering with anything.
+
+4. **Tamper with the `id` parameter.** In the Repeater request line, I changed:
+```
+GET /my-account?id=wiener HTTP/2
+```
+   to:
+```
+GET /my-account?id=carlos HTTP/2
+```
+   Critically, the `Cookie` header (wiener's session) was left untouched — I'm still authenticated as `wiener`, just asking for `carlos`'s `id`.
+
+5. **Send and inspect the raw response.** The response came back as:
+```
+HTTP/2 302 Found
+Location: /
+```
+   At a glance, in Repeater's **"Render"** view (which behaves more like a browser), this looks like nothing — a redirect with no visible content, since the render tab tends to follow/represent the redirect behavior.
+
+   The key step was switching to the **raw response view** ("Raw" tab in Repeater) instead of "Render" or "Pretty." In raw mode, Burp shows the *literal bytes* the server sent, unprocessed. There, below the `302` status line and `Location` header, the full HTML body was still present — and it was **carlos's account page**, including his API key in plaintext.
+
+<img width="1178" height="753" alt="Screenshot 2026-09-07 113553" src="https://github.com/user-attachments/assets/340a3c20-d545-49eb-8e83-d10b44ac83ae" />
+
+
+<img width="519" height="113" alt="Screenshot 2026-09-07 113647" src="https://github.com/user-attachments/assets/36fc0604-0ff2-4eb9-91af-d5910c25dfa7" />
