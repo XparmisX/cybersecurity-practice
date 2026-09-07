@@ -101,3 +101,16 @@ Either way, the server has no way to tell the difference because it never actual
 - If cookies must carry any security-relevant state, they need to be cryptographically signed and verified (e.g., signed JWT, HMAC) so tampering is detectable, a naive `true`/`false` string offers zero protection.
 - This is functionally similar to IDOR/broken access control issues in general: whenever an app's authorization logic depends on something the user can directly edit (URL parameter, cookie, hidden field), assume it can and will be manipulated during testing.
 - Burp's **Intercept Server Responses** option is a good tool to know for cases like this. It lets you tamper with data on the way *into* the browser, not just on the way out, which is useful when you want to see how the client behaves with attacker-modified server responses.
+
+# Lab: User ID controlled by request parameter
+
+**Category:** Access control
+
+**Difficulty:** Apprentice
+
+**Status:** Solved
+ 
+## Lab Description
+This lab has a horizontal privilege escalation vulnerability on the user account page. To solve the lab, obtain the API key for the user `carlos` and submit it as the solution. You can log in to your own account using the following credentials: `wiener:peter`
+
+## Solution 
