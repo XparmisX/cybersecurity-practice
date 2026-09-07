@@ -4,7 +4,7 @@
 
 **Difficulty:** Practitioner
 
-**Status:**
+**Status:** Solved
  
 ## Lab Description
 
