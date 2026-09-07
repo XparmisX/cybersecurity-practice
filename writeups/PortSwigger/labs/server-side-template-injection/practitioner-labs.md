@@ -33,7 +33,7 @@ https://LAB-ID.web-security-academy.net/?message=<%25+system("rm+/home/carlos/mo
 
 **Difficulty:** Practitioner
 
-**Status:** 
+**Status:** Solved
  
 ## Lab Description
 This lab is vulnerable to server-side template injection. To solve the lab, identify the template engine and use the documentation to work out how to execute arbitrary code, then delete the `morale.txt` file from Carlos's home directory. You can log in to your own account using the following credentials: `content-manager:C0nt3ntM4n4g3r`
