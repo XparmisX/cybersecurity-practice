@@ -115,3 +115,16 @@ This lab has a horizontal privilege escalation vulnerability on the user account
 
 ## Solution 
 Log in using the supplied credentials and go to your account page. Note that the URL contains your username in the "id" parameter. Send the request to Burp Repeater. Change the "id" parameter to `carlos`. Retrieve and submit the API key for `carlos`.
+
+# Lab: User ID controlled by request parameter, with unpredictable user IDs
+
+**Category:** Access control
+
+**Difficulty:** Apprentice
+
+**Status:** Solved
+ 
+## Lab Description
+This lab has a horizontal privilege escalation vulnerability on the user account page, but identifies users with GUIDs. To solve the lab, find the GUID for `carlos`, then submit his API key as the solution. You can log in to your own account using the following credentials: `wiener:peter`
+
+## Solution 
