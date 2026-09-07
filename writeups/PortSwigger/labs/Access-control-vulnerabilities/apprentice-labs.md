@@ -197,23 +197,23 @@ in the body:
 This is the part that actually explains the vulnerability, not just the symptom:
 
 - The server-side handler for `/my-account` appears to work in two loosely-coupled stages:
-  1. **Build the response body** by looking up account data for whatever `id` value was passed in the request — in this case, it fetched and rendered `carlos`'s full account data, seemingly *before* checking whether the current session (`wiener`) is actually allowed to view it.
-  2. **Apply the access control decision** afterward: the server recognizes that the *session owner* (`wiener`) does not match the *requested* `id` (`carlos`), and enforces this by issuing a `302` redirect to `/` — presumably intending to send the user "back to safety."
+  1. **Build the response body** by looking up account data for whatever `id` value was passed in the request, in this case, it fetched and rendered `carlos`'s full account data, seemingly *before* checking whether the current session (`wiener`) is actually allowed to view it.
+  2. **Apply the access control decision** afterward: the server recognizes that the *session owner* (`wiener`) does not match the *requested* `id` (`carlos`), and enforces this by issuing a `302` redirect to `/` presumably intending to send the user "back to safety."
 
-- The bug is that step 2 only modifies the **status code and headers** of the response (turning it into a redirect) — it does **not discard the response body** that was already generated in step 1. So the final HTTP response object ends up carrying two contradictory signals at once: a header saying "go away, redirect to home," and a body saying "here is carlos's private account data."
+- The bug is that step 2 only modifies the **status code and headers** of the response (turning it into a redirect). It does **not discard the response body** that was already generated in step 1. So the final HTTP response object ends up carrying two contradictory signals at once: a header saying "go away, redirect to home," and a body saying "here is carlos's private account data."
 
-- **HTTP semantics matter here:** according to HTTP conventions, a `3xx` response's body is not meant to carry meaningful content for the client to act on — it's optional supplementary text at most (e.g., "you are being redirected"). Browsers exploit this convention for user experience: on receiving a `3xx`, they immediately follow the `Location` header and never render or expose the original body to the user. This is *why testing this manually in a normal browser would show nothing suspicious* — the browser hides the leak by design, simply because it assumes redirect bodies are irrelevant.
+- **HTTP semantics matter here:** according to HTTP conventions, a `3xx` response's body is not meant to carry meaningful content for the client to act on. It's optional supplementary text at most (e.g., "you are being redirected"). Browsers exploit this convention for user experience: on receiving a `3xx`, they immediately follow the `Location` header and never render or expose the original body to the user. This is *why testing this manually in a normal browser would show nothing suspicious* The browser hides the leak by design, simply because it assumes redirect bodies are irrelevant.
 
-- **Burp Repeater doesn't make that assumption.** Since Repeater is a testing tool, not a browser, it shows the exact raw response bytes without automatically following the redirect or hiding the body. This is precisely what exposed the leak — the vulnerability was always there in the HTTP response; it just required a tool that doesn't "protect" you from seeing the full raw response the way a browser does.
+- **Burp Repeater doesn't make that assumption.** Since Repeater is a testing tool, not a browser, it shows the exact raw response bytes without automatically following the redirect or hiding the body. This is precisely what exposed the leak. The vulnerability was always there in the HTTP response; it just required a tool that doesn't "protect" you from seeing the full raw response the way a browser does.
 
 ## Root Cause Summary
 
 This is a **broken access control** vulnerability, specifically caused by an incorrect **order of operations**:
 
-> Sensitive data was generated based on user-controlled input (`id`) *before* the server verified that the requester was authorized to see it — and the subsequent access-control enforcement (the redirect) only adjusted the response's headers/status, not its body.
+> Sensitive data was generated based on user-controlled input (`id`) *before* the server verified that the requester was authorized to see it and the subsequent access-control enforcement (the redirect) only adjusted the response's headers/status, not its body.
 
-The fix would be to perform the authorization check *first*, and only proceed to fetch/render the account data if the check passes — otherwise, immediately return an empty-bodied redirect with no data ever generated in the first place.
+The fix would be to perform the authorization check *first*, and only proceed to fetch/render the account data if the check passes. Otherwise, immediately return an empty-bodied redirect with no data ever generated in the first place.
 
 ## Key Takeaway
 
-Never assume that a `3xx` (or any non-`200`) status code guarantees that no sensitive data was included in the response. Access control logic must gate *data generation itself*, not just the final response header/status. When testing for this class of bug, always inspect the **raw** HTTP response in a proxy tool — never rely on how a browser renders or represents the response, since browsers can silently mask exactly this type of leak.
+Never assume that a `3xx` (or any non-`200`) status code guarantees that no sensitive data was included in the response. Access control logic must gate *data generation itself*, not just the final response header/status. When testing for this class of bug, always inspect the **raw** HTTP response in a proxy tool, never rely on how a browser renders or represents the response, since browsers can silently mask exactly this type of leak.
