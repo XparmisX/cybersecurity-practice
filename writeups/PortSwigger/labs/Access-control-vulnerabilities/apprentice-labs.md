@@ -131,3 +131,16 @@ This lab has a horizontal privilege escalation vulnerability on the user account
 At first, I thought I have to generate a GUID for carlos somehow! But it turns out that the lab has given carlos GUID secretly somewhere! So here is the solution :
 
 Find a blog post by `carlos`. Click on `carlos` and observe that the URL contains his user ID. Make a note of this ID. Log in using the supplied credentials and access your account page. Change the "id" parameter to the saved user ID. Retrieve and submit the API key.
+
+# Lab: User ID controlled by request parameter with data leakage in redirect
+
+**Category:** Access control
+
+**Difficulty:** Apprentice
+
+**Status:** Solved
+ 
+## Lab Description
+This lab contains an access control vulnerability where sensitive information is leaked in the body of a redirect response. To solve the lab, obtain the API key for the user `carlos` and submit it as the solution. You can log in to your own account using the following credentials: `wiener:peter`
+
+## Solution 
