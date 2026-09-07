@@ -58,3 +58,6 @@ Remove the invalid syntax that you entered earlier, and insert your new payload 
 This lab is vulnerable to server-side template injection. To solve the lab, identify the template engine and find a documented exploit online that you can use to execute arbitrary code, then delete the `morale.txt` file from Carlos's home directory.
 
 ## Solution
+Notice that when you try to view more details about the first product, a `GET` request uses the `message` parameter to render `"Unfortunately this product is out of stock"` on the home page. Experiment by injecting a fuzz string containing template syntax from various different template languages, such as `${{<%[%'"}}%\`, into the `message` parameter. Notice that when you submit invalid syntax, an error message is shown in the output. This identifies that the website is using Handlebars. Search the web for "Handlebars server-side template injection". You should find a well-known exploit posted by `@Zombiehelp54`. Modify this exploit so that it calls `require("child_process").exec("rm /home/carlos/morale.txt")` as follows:
+```
+```
