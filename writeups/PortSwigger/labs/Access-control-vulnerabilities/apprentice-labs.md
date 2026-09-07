@@ -227,3 +227,11 @@ Never assume that a `3xx` (or any non-`200`) status code guarantees that no sens
 **Status:** Solved
  
 ## Lab Description
+This lab stores user chat logs directly on the server's file system, and retrieves them using static URLs. Solve the lab by finding the password for the user `carlos`, and logging into their account.
+
+## Solution
+Select the **Live chat** tab. Send a message and then select **View transcript**. Review the URL and observe that the transcripts are text files assigned a filename containing an incrementing number. Change the filename to `1.txt` and review the text. Notice a password within the chat transcript.
+
+<img width="1175" height="749" alt="Screenshot 2026-09-07 122243" src="https://github.com/user-attachments/assets/45a8c422-a228-463c-913a-149068e87967" />
+
+Return to the main lab page and log in using the stolen credentials.
