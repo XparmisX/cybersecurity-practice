@@ -17,3 +17,13 @@
 **Status:** 
  
 ## Lab Description
+
+# Lab: Inconsistent security controls
+
+**Category:** Business logic vulnerabilities 
+
+**Difficulty:** Apprentice
+
+**Status:** 
+ 
+## Lab Description
