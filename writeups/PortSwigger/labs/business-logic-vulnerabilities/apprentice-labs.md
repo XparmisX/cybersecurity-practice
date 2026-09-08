@@ -27,3 +27,13 @@
 **Status:** Solved 
  
 ## Lab Description
+
+# Lab: Flawed enforcement of business rules
+
+**Category:** Business logic vulnerabilities 
+
+**Difficulty:** Apprentice
+
+**Status:** 
+ 
+## Lab Description
