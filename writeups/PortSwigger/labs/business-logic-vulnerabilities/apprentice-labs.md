@@ -7,3 +7,13 @@
 **Status:** Solved
  
 ## Lab Description
+
+# Lab: High-level logic vulnerability
+
+**Category:** Business logic vulnerabilities 
+
+**Difficulty:** Apprentice
+
+**Status:** 
+ 
+## Lab Description
