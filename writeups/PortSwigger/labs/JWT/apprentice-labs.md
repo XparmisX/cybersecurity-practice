@@ -8,6 +8,8 @@
  
 ## Lab Description
 
+## Solution
+
 # Lab: JWT authentication bypass via flawed signature verification
 
 **Category:** JWT attacks 
@@ -17,3 +19,5 @@
 **Status:** Solved
  
 ## Lab Description
+
+## Solution
