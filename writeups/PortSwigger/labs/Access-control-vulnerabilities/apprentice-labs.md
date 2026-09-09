@@ -102,6 +102,8 @@ Either way, the server has no way to tell the difference because it never actual
 - This is functionally similar to IDOR/broken access control issues in general: whenever an app's authorization logic depends on something the user can directly edit (URL parameter, cookie, hidden field), assume it can and will be manipulated during testing.
 - Burp's **Intercept Server Responses** option is a good tool to know for cases like this. It lets you tamper with data on the way *into* the browser, not just on the way out, which is useful when you want to see how the client behaves with attacker-modified server responses.
 
+# Lab: User role can be modified in user profile
+
 # Lab: User ID controlled by request parameter
 
 **Category:** Access control
