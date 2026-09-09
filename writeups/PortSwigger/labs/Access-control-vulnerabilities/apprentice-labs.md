@@ -239,6 +239,8 @@ The fix would be to perform the authorization check *first*, and only proceed to
 
 Never assume that a `3xx` (or any non-`200`) status code guarantees that no sensitive data was included in the response. Access control logic must gate *data generation itself*, not just the final response header/status. When testing for this class of bug, always inspect the **raw** HTTP response in a proxy tool, never rely on how a browser renders or represents the response, since browsers can silently mask exactly this type of leak.
 
+# Lab: User ID controlled by request parameter with password disclosure
+
 # Lab: Insecure direct object references
 
 **Category:** Access control
