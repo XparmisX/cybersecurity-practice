@@ -251,6 +251,11 @@ Never assume that a `3xx` (or any non-`200`) status code guarantees that no sens
 This lab has user account page that contains the current user's existing password, prefilled in a masked input. To solve the lab, retrieve the administrator's password, then use it to delete the user `carlos`. You can log in to your own account using the following credentials: `wiener:peter`
 
 ## Solution
+Log in using the supplied credentials and access the user account page. Change the "id" parameter in the URL to `administrator`. View the response in Burp and observe that it contains the administrator's password.
+
+<img width="1181" height="791" alt="Screenshot 2026-09-09 172010" src="https://github.com/user-attachments/assets/27826906-4e3b-49e9-8ce4-83a711bbf567" />
+
+Log in to the administrator account and delete `carlos`.
 
 # Lab: Insecure direct object references
 
