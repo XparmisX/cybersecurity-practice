@@ -241,6 +241,17 @@ Never assume that a `3xx` (or any non-`200`) status code guarantees that no sens
 
 # Lab: User ID controlled by request parameter with password disclosure
 
+**Category:** Access control
+
+**Difficulty:** Apprentice
+
+**Status:** Solved
+ 
+## Lab Description
+This lab has user account page that contains the current user's existing password, prefilled in a masked input. To solve the lab, retrieve the administrator's password, then use it to delete the user `carlos`. You can log in to your own account using the following credentials: `wiener:peter`
+
+## Solution
+
 # Lab: Insecure direct object references
 
 **Category:** Access control
