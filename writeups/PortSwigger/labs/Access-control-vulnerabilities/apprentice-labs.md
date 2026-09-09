@@ -104,6 +104,15 @@ Either way, the server has no way to tell the difference because it never actual
 
 # Lab: User role can be modified in user profile
 
+**Category:** Access control
+
+**Difficulty:** Apprentice
+
+**Status:** Solved
+
+## Lab Description
+This lab has an admin panel at `/admin`. It's only accessible to logged-in users with a `roleid` of 2. Solve the lab by accessing the admin panel and using it to delete the user `carlos`. You can log in to your own account using the following credentials: `wiener:peter`
+
 # Lab: User ID controlled by request parameter
 
 **Category:** Access control
