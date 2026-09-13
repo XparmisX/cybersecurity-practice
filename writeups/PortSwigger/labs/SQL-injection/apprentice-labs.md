@@ -1,10 +1,10 @@
-# Lab: 
+# Lab: SQL injection vulnerability in WHERE clause allowing retrieval of hidden data
 
-**Category:**
+**Category:** SQLi
 
 **Difficulty:** Apprentice
 
-**Status:** 
+**Status:** Solved
  
 ## Lab Description
 
