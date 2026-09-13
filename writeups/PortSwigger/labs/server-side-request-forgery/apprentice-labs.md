@@ -22,7 +22,7 @@ Submit this URL in the `stockApi` parameter, to deliver the SSRF attack.
 
 **Difficulty:** Apprentice
 
-**Status:** Solved
+**Status:** 
  
 ## Lab Description
 
