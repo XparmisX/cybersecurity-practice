@@ -10,13 +10,13 @@
 
 ## Solution
 
-# Lab: 
+# Lab: SQL injection vulnerability allowing login bypass
 
-**Category:**
+**Category:** SQLi
 
 **Difficulty:** Apprentice
 
-**Status:** 
+**Status:** Solved
  
 ## Lab Description
 
