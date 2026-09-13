@@ -1,6 +1,6 @@
-# Lab: 
+# Lab: OS command injection, simple case
 
-**Category:**
+**Category:** OS command injection 
 
 **Difficulty:** Apprentice
 
