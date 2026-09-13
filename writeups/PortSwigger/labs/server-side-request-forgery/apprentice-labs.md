@@ -1,22 +1,22 @@
-# Lab: 
+# Lab: Basic SSRF against the local server
 
-**Category:**
+**Category:** SSRF
 
 **Difficulty:** Apprentice
 
-**Status:** 
+**Status:** Solved
  
 ## Lab Description
 
 ## Solution
 
-# Lab: 
+# Lab: Basic SSRF against another back-end system
 
-**Category:**
+**Category:** SSRF
 
 **Difficulty:** Apprentice
 
-**Status:** 
+**Status:** Solved
  
 ## Lab Description
 
