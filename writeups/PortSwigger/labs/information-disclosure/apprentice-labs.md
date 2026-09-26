@@ -44,3 +44,25 @@ This lab leaks its source code via backup files in a hidden directory. To solve 
 
 ## Solution
 Browse to `/robots.txt` and notice that it reveals the existence of a `/backup` directory. Browse to `/backup` to find the file `ProductTemplate.java.bak`. Alternatively, right-click on the lab in the site map and go to "Engagement tools" > "Discover content". Then, launch a content discovery session to discover the `/backup` directory and its contents. Browse to `/backup/ProductTemplate.java.bak` to access the source code. In the source code, notice that the connection builder contains the hard-coded password for a Postgres database. Go back to the lab, click "Submit solution", and enter the database password to solve the lab.
+
+# Lab: Authentication bypass via information disclosure
+
+**Category:** Information disclosure
+
+**Difficulty:** Apprentice
+
+**Status:** Solved
+ 
+## Lab Description
+This lab's administration interface has an authentication bypass vulnerability, but it is impractical to exploit without knowledge of a custom HTTP header used by the front-end. To solve the lab, obtain the header name then use it to bypass the lab's authentication. Access the admin interface and delete the user `carlos`. You can log in to your own account using the following credentials: `wiener:peter`
+
+## Solution
+In Burp Repeater, browse to `GET /admin`. The response discloses that the admin panel is only accessible if logged in as an administrator, or if requested from a local IP. Send the request again, but this time use the `TRACE` method:
+```
+TRACE /admin
+```
+Study the response. Notice that the `X-Custom-IP-Authorization` header, containing your IP address, was automatically appended to your request. This is used to determine whether or not the request came from the `localhost` IP address. Go to **Proxy > Match and replace**. Under **HTTP match and replace rules**, click **Add**. The **Add** **match/replace rule** dialog opens. Leave the **Match** field empty. Under **Type**, make sure that **Request header** is selected. In the **Replace** field, enter the following:
+```
+X-Custom-IP-Authorization: 127.0.0.1
+```
+Click `Test`. Under **Auto-modified request**, notice that Burp has added the `X-Custom-IP-Authorization` header to the modified request. Click **OK**. Burp Proxy now adds the `X-Custom-IP-Authorization` header to every request you send. Browse to the home page. Notice that you now have access to the admin panel, where you can delete `carlos`.
