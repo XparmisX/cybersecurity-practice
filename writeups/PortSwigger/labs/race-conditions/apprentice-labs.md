@@ -11,3 +11,5 @@ This lab's purchasing flow contains a race condition that enables you to purchas
 ### Note: For a faster and more convenient way to trigger the race condition, we recommend that you solve this lab using the Trigger race conditions custom action. This is only available in Burp Suite Professional.
 
 ## Solution
+
+GONNA BE SOLVED AND COMPLETED
